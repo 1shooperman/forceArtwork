@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Data>
+<baseImgUrl>http://thegamesdb.net/banners/</baseImgUrl>
+<Game>
+<id>12345</id>
+<GameTitle>Porsche Challenge</GameTitle>
+<PlatformId>10</PlatformId>
+<Platform>Sony Playstation</Platform>
+<ReleaseDate>06/30/1997</ReleaseDate>
+<Overview>Open-road racing in its purest form. Designed exclusively with Porsche, and modeled to their exact specifications. Everything you need to test your instincts for the open road. 4 racing environments (USA, Japan, Stuttgart, Alpine) with over 20 track combinations. Even race at Stuttgart -Porsche's official test track.</Overview>
+<ESRB>E - Everyone</ESRB>
+<Genres><genre>Racing</genre></Genres><Players>2</Players><Co-op>No</Co-op>
+<Youtube>http://www.youtube.com/watch?v=HBNOuXPbe4k</Youtube>
+<Publisher>Sony</Publisher>
+<Developer>Sony</Developer>
+<Rating>7.3333</Rating><Images>
+<fanart>
+<original width="1920" height="1080">fanart/original/12345-1.jpg</original>
+<thumb>fanart/thumb/12345-1.jpg</thumb>
+</fanart>
+<fanart>
+<original width="1920" height="1080">fanart/original/12345-2.jpg</original>
+<thumb>fanart/thumb/12345-2.jpg</thumb>
+</fanart>
+<fanart>
+<original width="1920" height="1080">fanart/original/12345-3.jpg</original>
+<thumb>fanart/thumb/12345-3.jpg</thumb>
+</fanart>
+<boxart side="back" width="587" height="512" thumb="boxart/thumb/original/back/12345-1.jpg">boxart/original/back/12345-1.jpg</boxart>
+<boxart side="front" width="600" height="600" thumb="boxart/thumb/original/front/12345-1.jpg">boxart/original/front/12345-1.jpg</boxart>
+<screenshot>
+<original width="640" height="480">screenshots/12345-1.jpg</original>
+<thumb>screenshots/thumb/12345-1.jpg</thumb>
+</screenshot>
+<clearlogo width="400" height="104">clearlogo/12345.png</clearlogo></Images>
+</Game>
+</Data>
