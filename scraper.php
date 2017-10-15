@@ -3,20 +3,15 @@
 require_once('./lib/scraperClass.php');
 
 $gameId = (int) $argv[1];
+$source = @$argv[2] or 'local';
 
-$gameXml = Scraper::getLocalGameXml();
+$gameData = Scraper::getGame($gameId, $source);
 
-$doc = new SimpleXMLElement($gameXml);
+$gameName = Scraper::getName($gameData);
 
-$gameData = Scraper::parseData($doc);
-
-$gameName = preg_replace(
-                '/[^a-z0-9]/i',
-                '_',
-                trim(
-                    (string) $gameData->name
-                )
-            );
+if ($source === 'remote') {
+    Scraper::getImage((string)$gameData->remoteImage, $gameName);
+}
 
 $dom = new DOMDocument("1.0");
 $dom->preserveWhiteSpace = false;

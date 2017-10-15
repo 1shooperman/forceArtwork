@@ -9,8 +9,9 @@ class Scraper {
     {
         $ch = curl_init(); 
         
-        curl_setopt($ch, CURLOPT_URL, static::_url . $id); 
+        curl_setopt($ch, CURLOPT_URL, static::$_url . $id); 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+        //curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
         
         $remoteXml = curl_exec($ch); 
 
@@ -71,22 +72,40 @@ class Scraper {
         return $base . $image;
     }
 
+    public static function getName(SimpleXMLElement $xml) 
+    {
+        $gameName = preg_replace(
+            '/[^a-z0-9]/i',
+            '_',
+            trim(
+                (string) $xml->name
+            )
+        );
+
+        return $gameName;
+    }
+
     /**
      * @see https://stackoverflow.com/questions/6348602/download-remote-file-to-server-with-php
      */
-    public static function getImage($imageUrl, $name = '') 
+    public static function getImage($imageUrl, $name = 'foo') 
     {
+        $pathInfo = pathinfo($imageUrl);
+        $ext = $pathInfo['extension'];
+
         $destination = "data/";
         if (strlen($name)) {
-            $destination .= $name;
+            $destination .= "$name.$ext";
         }
         
         $fp = fopen($destination, 'w+');
         $ch = curl_init();
-        curl_setopt( $ch, CURLOPT_URL, $url );
+        curl_setopt( $ch, CURLOPT_URL, $imageUrl );
         curl_setopt( $ch, CURLOPT_BINARYTRANSFER, true );
         curl_setopt( $ch, CURLOPT_RETURNTRANSFER, false );
         curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
+        
+        //curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
     
         curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 10 );
         curl_setopt( $ch, CURLOPT_FILE, $fp );
@@ -97,8 +116,18 @@ class Scraper {
         return true;
     }
 
-    public static function getGame($id) 
+    public static function getGame($gameId, $src = 'local') 
     {
+        if ($src === 'remote') {
+            $gameXml = static::getRemoteGameXml($gameId);
+        } else {
+            $gameXml = static::getLocalGameXml();
+        }
 
+        $doc = new SimpleXMLElement($gameXml);
+        
+        $gameData = Scraper::parseData($doc);
+
+        return $gameData;
     }
 }
